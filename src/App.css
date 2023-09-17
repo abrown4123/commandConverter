@@ -2,9 +2,25 @@
   text-align: center;
 }
 
+.App > div {
+  margin: 30px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+code {
+  display: block;
+  text-align: left;
+  padding: 1em;
+  margin: 0 30em;
+  background-color: rgb(199, 204, 204);
+}
+
+pre {
+  margin: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
