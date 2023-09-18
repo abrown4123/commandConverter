@@ -7,17 +7,47 @@ import DisplayCode from './components/DisplayCode';
 function App() {
 
   const [code, setCode] = useState([])
+
+  const locatorStrategy = request => {
+    if(request.using.includes("css")) {
+      return "css"
+    }
+  }
+
+  const getElementId = result => {
+    for(let propName in result) {
+      return result[propName];
+    }
+  }
+
+  const routePath = (path, method, request, result, testCommands, i) => {
+    if (method === "POST" && path === "url") {
+      return pythonMappings[method][path](request.url) 
+    } 
+    if (method === "POST" && path === "element") {
+      let strategy = locatorStrategy(request)
+      testCommands[getElementId(result)] = `elem${i}` 
+      return pythonMappings[method][path][strategy](`elem${i}`, request.value)
+    }
+    if (method === "POST" && path.includes("click")) {
+      return pythonMappings[method]["click"](testCommands[request.id])
+    }
+    if (method === "POST" && path.includes("value")) {
+      return pythonMappings[method]["sendKeys"](testCommands[request.id], request.text)
+    }
+    return pythonMappings[method][path]
+  }
+
   const convertCode = () => {
     let testCommands = [];
-    sampleData.forEach(command => {
+    sampleData.forEach((command, i) => {
       try {
-        let {path, method} = command;
+        let {path, method, request, result} = command;
         path = path.includes("session") ? "session" : path
-        method === "POST" && path !== "session"
-          ?
-          testCommands = [...testCommands, pythonMappings[method][path](command.request.url)]
-          :
-          testCommands = [...testCommands, pythonMappings[method][path]]
+        testCommands[i] = {
+          id: i, 
+          command: routePath(path, method, request, result, testCommands, i)
+        }
       } catch(e) {
         console.log(command)
         console.log(e)
@@ -33,18 +63,18 @@ function App() {
 
   return (
     <div className="App">
-      This is a placeholder
+      <h1>Code Converter</h1>
       <div>
         <button onClick={convertCode}>
-          Execute function
+          Convert!
         </button>
       </div>
       <code>
-        {code.map((command, id) => 
+        {code.map(commandObj => 
           <DisplayCode 
-            key={id}
-            command={command} 
-            />
+            key={commandObj.id}
+            command={commandObj.command} 
+          />
         )}
       </code>
     </div>
