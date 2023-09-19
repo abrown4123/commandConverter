@@ -22,6 +22,8 @@ function App() {
     };
   }
 
+  const getIdFromPath = path => path.split("/")[1]
+
   const getElementId = result => {
     for(let propName in result) {
       return result[propName];
@@ -38,11 +40,10 @@ function App() {
     }
 
     if (method === "POST" && path.includes("click")) {
-      let clickId = path.split("/")[1];
-      return pythonMappings[method]["click"](testCommands[clickId]) //this is click
+      return pythonMappings[method]["click"](testCommands[getIdFromPath(path)]) //this is click
     }
 
-    if (method === "POST" && path.includes("value")) return pythonMappings[method]["sendKeys"](testCommands[request.id], request.text) //this is sendKeys
+    if (method === "POST" && path.includes("value")) return pythonMappings[method]["sendKeys"](testCommands[getIdFromPath(path)], request.text) //this is sendKeys
 
     if (pythonMappings[method][path] !== undefined) return pythonMappings[method][path]
 
