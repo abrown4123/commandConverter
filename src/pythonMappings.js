@@ -6,10 +6,11 @@ let pythonMappings = {
       url(website) {return `driver.get("${website}")`},
       session: "Sesssion Created!",
       element: {
-        css(variable, selector) {return `let ${variable} = driver.find_element(By.CSS, ${selector})`}
+        css(variable, selector) {return `let ${variable} = driver.find_element(By.CSS, "${selector}")`},
+        xpath(variable, selector) {return `let ${variable} = driver.find_element(By.XPATH, "${selector}")`}
       },
       click(elementId) {return `${elementId}.click()`},
-      sendKeys(elementId, value) {return `${elementId}.send_keys(${value})`}
+      sendKeys(elementId, value) {return `${elementId}.send_keys("${value}")`}
     },
     DELETE: {
       session: "driver.quit()"

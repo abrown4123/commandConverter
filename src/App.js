@@ -9,9 +9,8 @@ function App() {
   const [jsonLog, setJsonLog] = useState([]);
 
   const locatorStrategy = request => {
-    if(request.using.includes("css")) {
-      return "css"
-    }
+    if(request.using.includes("css")) return "css"
+    if(request.using.includes("xpath")) return "xpath"
   }
 
   const handleChange = e => {

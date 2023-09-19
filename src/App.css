@@ -15,7 +15,8 @@ code {
   display: block;
   text-align: left;
   padding: 1em;
-  margin: 0 30em;
+  margin: 0 auto;
+  width: 70%;
   background-color: rgb(199, 204, 204);
 }
 
