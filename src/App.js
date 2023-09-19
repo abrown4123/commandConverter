@@ -79,6 +79,7 @@ function App() {
   return (
     <div className="App">
       <h1>Command Converter</h1>
+      <h3>This app reverse engineers Sauce Selenium log.json files to simple test scripts</h3>
       <div>
         <input id="json" type="file" name="json" onChange={handleChange} />
         <button type="submit" onClick={convertCode}>
