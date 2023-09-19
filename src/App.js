@@ -33,7 +33,7 @@ function App() {
   const routePath = (path, method, request, result, testCommands, i) => {
     if (method === "POST" && path === "url") return pythonMappings[method][path](request.url) //This path is driver.get
 
-    if (method === "POST" && path === "element") { //This path is findElem
+    if (method === "POST" && path.includes("element")) { //This path is findElem
       let strategy = locatorStrategy(request)
       testCommands[getElementId(result)] = `elem${i}` 
       return pythonMappings[method][path][strategy](`elem${i}`, request.value)
