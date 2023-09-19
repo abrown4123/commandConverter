@@ -38,7 +38,10 @@ function App() {
       return pythonMappings[method][path][strategy](`elem${i}`, request.value)
     }
 
-    if (method === "POST" && path.includes("click")) return pythonMappings[method]["click"](testCommands[request.id]) //this is click
+    if (method === "POST" && path.includes("click")) {
+      let clickId = path.split("/")[1];
+      return pythonMappings[method]["click"](testCommands[clickId]) //this is click
+    }
 
     if (method === "POST" && path.includes("value")) return pythonMappings[method]["sendKeys"](testCommands[request.id], request.text) //this is sendKeys
 
