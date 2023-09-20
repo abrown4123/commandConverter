@@ -1,9 +1,9 @@
 import React from "react";
 
-const DisplayCode = (props) => {
+const DisplayCode = ({command}) => {
   return (
     <>
-      <pre>{props.command}</pre>
+      <pre>{command}</pre>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import pythonMappings from './pythonMappings';
+import routePath from './routes';
 import DisplayCode from './components/DisplayCode';
 
 function App() {
@@ -8,11 +8,7 @@ function App() {
   const [code, setCode] = useState([])
   const [jsonLog, setJsonLog] = useState([]);
 
-  const locatorStrategy = request => {
-    if(request.using.includes("css")) return "css"
-    if(request.using.includes("xpath")) return "xpath"
-  }
-
+  
   const handleChange = e => {
     const fileReader = new FileReader();
     fileReader.readAsText(e.target.files[0], "UTF-8");
@@ -20,34 +16,6 @@ function App() {
       console.log("e.target.result", e.target.result);
       setJsonLog(JSON.parse(e.target.result));
     };
-  }
-
-  const getIdFromPath = path => path.split("/")[1]
-
-  const getElementId = result => {
-    for(let propName in result) {
-      return result[propName];
-    }
-  }
-
-  const routePath = (path, method, request, result, testCommands, i) => {
-    if (method === "POST" && path === "url") return pythonMappings[method][path](request.url) //This path is driver.get
-
-    if (method === "POST" && path.includes("element")) { //This path is findElem
-      let strategy = locatorStrategy(request)
-      testCommands[getElementId(result)] = `elem${i}` 
-      return pythonMappings[method][path][strategy](`elem${i}`, request.value)
-    }
-
-    if (method === "POST" && path.includes("click")) {
-      return pythonMappings[method]["click"](testCommands[getIdFromPath(path)]) //this is click
-    }
-
-    if (method === "POST" && path.includes("value")) return pythonMappings[method]["sendKeys"](testCommands[getIdFromPath(path)], request.text) //this is sendKeys
-
-    if (pythonMappings[method][path] !== undefined) return pythonMappings[method][path]
-
-    return `This command is not yet supported. ${method}: ${path}`
   }
 
   const convertCode = () => {
