@@ -20,6 +20,10 @@ code {
   background-color: rgb(199, 204, 204);
 }
 
+.error {
+  color: red;
+}
+
 pre {
   margin: 0;
 }
