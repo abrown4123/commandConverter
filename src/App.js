@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import routePath from './routes';
 import DisplayCode from './components/DisplayCode';
 
@@ -49,9 +49,9 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    console.log(code);
-  }, [code])
+  // useEffect(() => {
+  //   console.log(code);
+  // }, [code])
 
 
   return (
@@ -66,10 +66,10 @@ function App() {
         </button>
       </div>
       <code>
-        {code.map(commandObj => 
+        {code.map(({id, command}) => 
           <DisplayCode 
-            key={commandObj.id}
-            command={commandObj.command} 
+            key={id}
+            command={command} 
           />
         )}
       </code>
