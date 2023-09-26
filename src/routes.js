@@ -30,9 +30,9 @@ const routePath = (path, method, request, result, testCommands, i) => {
 
   if (method === "POST" && path.includes("value")) return pythonMappings[method]["sendKeys"](testCommands[getIdFromPath(path)], request.text) //this is sendKeys
   
-  if (method === "POST" && path.includes("element")) { //This path is findElem
+  if (method === "POST" && (path === "element" || path === "elements")) { //This path is findElem
     let strategy = locatorStrategy(request)
-    return `${pythonMappings[method]["element"][strategy](`elem${i}`, request.value)}${findElemResults(testCommands, result, i)}`
+    return `${pythonMappings[method][path][strategy](`elem${i}`, request.value)}${findElemResults(testCommands, result, i)}`
   }
 
   if (pythonMappings[method][path] !== undefined) return pythonMappings[method][path] //for get methods that do not need an argument

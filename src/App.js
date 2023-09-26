@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import routePath from './routes';
 import DisplayCode from './components/DisplayCode';
 
@@ -33,7 +33,7 @@ function App() {
       jsonLog.forEach((command, i) => {
         try {
           let {path, method, request, result} = command;
-          path = path.includes("session") ? "session" : path
+          path = path.includes("session") ? "session" : path //post and delete sessions are assigned here
           testCommands[i] = {
             id: i, 
             command: routePath(path, method, request, result, testCommands, i)
@@ -49,9 +49,9 @@ function App() {
     }
   }
 
-  // useEffect(() => {
-  //   console.log(code);
-  // }, [code])
+  useEffect(() => {
+    console.log(code);
+  }, [code])
 
 
   return (
