@@ -25,8 +25,8 @@ const findElementsResults = (testCommands, result, i) => {
 
 const findElementResults = (testCommands, result, i) => {
   if(result.length === 0) return '';
-  if(result.error !== undefined) return ` // command returned ${result.error}`;
-  if(result.message !== undefined) return ` // command returned ${result.message}`;
+  if(result.error !== undefined) return ` # command returned ${result.error}`;
+  if(result.message !== undefined) return ` # command returned ${result.message}`;
   testCommands[getElementId(result)] = `elem${i}`;
   return '';
 }
