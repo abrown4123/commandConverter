@@ -40,6 +40,10 @@ const routePath = (path, method, request, result, testCommands, i) => {
     return pythonMappings[method]["click"](testCommands[getIdFromPath(path)]) //this is click
   }
 
+  if (method === "GET" && path.includes("text")) {
+    return pythonMappings[method]["text"](testCommands[getIdFromPath(path)])
+  }
+
   if (method === "POST" && path.includes("value")) return pythonMappings[method]["sendKeys"](testCommands[getIdFromPath(path)], getTextValue(request)) //this is sendKeys
   
   if (method === "POST" && (route === "element" || route === "elements")) { //This path is findElem

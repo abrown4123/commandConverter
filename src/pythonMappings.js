@@ -1,6 +1,7 @@
 let pythonMappings = {
     GET: {
-      url: "driver.title"
+      url: "driver.title",
+      text(elementId, value) {return `${elementId}.text`}
     },
     POST: {
       url(website) {return `driver.get("${website}")`},
