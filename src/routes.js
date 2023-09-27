@@ -40,6 +40,8 @@ const routePath = (path, method, request, result, testCommands, i) => {
     return pythonMappings[method]["click"](testCommands[getIdFromPath(path)]) //this is click
   }
 
+  if (method === "POST" && path === "execute") return pythonMappings[method][path](request.script)
+
   if (method === "GET" && path.includes("text")) {
     return pythonMappings[method]["text"](testCommands[getIdFromPath(path)])
   }
