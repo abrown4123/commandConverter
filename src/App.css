@@ -3,7 +3,7 @@
 }
 
 .App > div {
-  margin: 30px;
+  margin: 30px auto;
 }
 
 .App-logo {
@@ -12,6 +12,12 @@
 }
 
 code {
+  margin: 0;
+  padding: 0.2em 0.4em !important;
+  display: block;
+}
+
+.code {
   display: block;
   text-align: left;
   padding: 1em;

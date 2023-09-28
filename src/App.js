@@ -44,12 +44,14 @@ function App() {
         }
       })
       setCode(testCommands)
+      
     } else {
       console.log("No commands found!")
     }
   }
 
   useEffect(() => {
+    window.hljs.highlightAll()
     console.log(code);
   }, [code])
 
@@ -65,14 +67,7 @@ function App() {
           Convert!
         </button>
       </div>
-      <code>
-        {code.map(({id, command}) => 
-          <DisplayCode 
-            key={id}
-            command={command} 
-          />
-        )}
-      </code>
+      <DisplayCode script={code} />
     </div>
   );
 }

@@ -1,10 +1,12 @@
 import React from "react";
 
-const DisplayCode = ({command}) => {
+const DisplayCode = ({script}) => {
   return (
-    <>
-      <pre>{command}</pre>
-    </>
+    <div className={ script.length ? "code" : ""}>
+      <pre className="language-python">
+        {script.map(({id, command}) => <code key={id}> {command}</code>)}
+      </pre>    
+    </div>
   );
 }
 
