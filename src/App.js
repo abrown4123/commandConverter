@@ -49,7 +49,7 @@ function App() {
       console.log("No commands found!")
     }
   }
-
+  
   useEffect(() => {
     window.hljs.highlightAll()
     console.log(code);

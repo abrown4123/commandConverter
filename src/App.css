@@ -13,13 +13,18 @@
 
 code {
   margin: 0;
-  padding: 0.2em 0.4em !important;
+  padding: 1em !important;
   display: block;
+}
+
+.hide {
+  display: none;
 }
 
 .code {
   display: block;
   text-align: left;
+  line-height: 1.1rem;
   padding: 1em;
   margin: 0 auto;
   width: 80%;
