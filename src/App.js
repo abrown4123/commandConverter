@@ -44,14 +44,12 @@ function App() {
         }
       })
       setCode(testCommands)
-      
     } else {
       console.log("No commands found!")
     }
   }
   
   useEffect(() => {
-    window.hljs.highlightAll()
     console.log(code);
   }, [code])
 
