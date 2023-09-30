@@ -2,17 +2,13 @@ import React from "react";
 
 const DisplayCode = ({script}) => {
   return (
-    <div>
-      <div className={ script.length ? "code" : "hide"}>
-        <pre>
-          <code className="language-python">
-            {script.map(({command}) => 
-              `${command} \n`
-            )}
-          </code>
-        </pre>    
-      </div>
-    </div>
+    <pre className={ script.length ? "code" : "hide"}>
+      <code>
+        {script.map(({command}) => 
+            `${command} \n`
+        )}
+      </code>
+    </pre>    
   );
 }
 

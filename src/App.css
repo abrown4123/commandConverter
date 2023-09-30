@@ -14,7 +14,13 @@
 code {
   margin: 0;
   padding: 1em !important;
+  overflow-x: auto;
   display: block;
+  background: #f3f3f3;
+}
+
+span {
+  color: #800;
 }
 
 .hide {
