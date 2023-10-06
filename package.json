@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "http://abrown4123.github.io/commandConverter",
+  "type": "module",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "node-fetch": "^3.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-highlight": "^0.15.0",
@@ -40,6 +42,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^6.0.0"
+    "gh-pages": "^6.0.0",
+    "jsdoc": "^4.0.2"
   }
 }
