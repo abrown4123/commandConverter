@@ -1,4 +1,4 @@
-let pythonMappings = {
+let pythonSeleniumMappings = {
     GET: {
       url: "driver.title",
       text(elementId, value) {return `${elementId}.text`}
@@ -23,4 +23,4 @@ let pythonMappings = {
     }
 }
 
-export default pythonMappings;
+export default pythonSeleniumMappings;
