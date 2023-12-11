@@ -28,7 +28,7 @@ switch (args.region) {
         region = REST_API_REGION.US_WEST_1
         break;
     case 'useast':
-        region = REST_API_REGION.US_WEST_1
+        region = REST_API_REGION.US_EAST_4
         break;
     default:
         break;
