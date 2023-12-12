@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { getRdcJob, getAsset } from './../lib/apiCall.js'
+import { getJobDetails, getAsset } from './../lib/apiCall.js'
 import { REST_API_REGION } from './../lib/endpoints.js'
 
 const args = yargs(hideBin(process.argv))
@@ -34,7 +34,7 @@ switch (args.region) {
         break;
 }
 
-const job = await getRdcJob(test, region, creds)
+const job = await getJobDetails(test, region, creds)
 var stuffToDownload = []
 for (const [k,v] of Object.entries(job.assets)) {
     console.log(k,v)
