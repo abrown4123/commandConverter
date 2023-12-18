@@ -34,15 +34,14 @@ switch (args.region) {
         break;
 }
 
-const job = await getJobDetails(test, region, creds)
+const jobInfo = await getJobDetails(test, region, creds)
 var stuffToDownload = []
-for (const [k,v] of Object.entries(job.assets)) {
-    console.log(k,v)
+for (const [k,v] of Object.entries(jobInfo.assets)) {
     if (v != null) {
         stuffToDownload.push(v)
     }
 }
-console.log(job);
+console.log(jobInfo)
 
 stuffToDownload.forEach(async (url) => {
     await getAsset(creds, url)
