@@ -37,22 +37,22 @@ switch (args.region) {
         break;
 }
 
+const downloadLocation = await mkDownloadFolder(null, test)
 const jobInfo = await getJobDetails(test, region, creds)
 const parsedjobInfo = JSON.parse(jobInfo)
 var stuffToDownload = []
-for (const [k,v] of Object.entries(parsedjobInfo.assets)) {
-    if (v != null) {
-        stuffToDownload.push(v)
+for (const [k,url] of Object.entries(parsedjobInfo.assets)) {
+    if (url != null) {
+        stuffToDownload.push(url)
     }
 }
 console.log(jobInfo)
 
 stuffToDownload.forEach(async (url) => {
-    await getAsset(creds, url)
+    await getAsset(creds, url)   
 });
-const downloadLocation = mkDownloadFolder(null, test)
-const filePath = path.join(`${downloadLocation}`, `info_${test}.json`);
-fs.writeFile(filePath, jobInfo, 'utf8', (writeErr) => {
+const infoFile = path.join(`${downloadLocation}`, `info_${test}.json`)
+await fs.writeFile(infoFile, jobInfo, 'utf8', (writeErr) => {
     if (writeErr) {
       console.error(`Error writing to the file: ${writeErr}`);
       return;
