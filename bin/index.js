@@ -1,8 +1,11 @@
 #!/usr/bin/env node
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import { getJobDetails, getAsset } from './../lib/apiCall.js'
+import { getJobDetails, getAsset, mkDownloadFolder } from './../lib/apiCall.js'
 import { REST_API_REGION } from './../lib/endpoints.js'
+import * as path from 'node:path'
+import * as fs from 'node:fs'
+
 
 const args = yargs(hideBin(process.argv))
 .option('u', {alias: 'user', describe: 'Sauce Labs Username', demandOption: true})
@@ -35,8 +38,9 @@ switch (args.region) {
 }
 
 const jobInfo = await getJobDetails(test, region, creds)
+const parsedjobInfo = JSON.parse(jobInfo)
 var stuffToDownload = []
-for (const [k,v] of Object.entries(jobInfo.assets)) {
+for (const [k,v] of Object.entries(parsedjobInfo.assets)) {
     if (v != null) {
         stuffToDownload.push(v)
     }
@@ -46,3 +50,11 @@ console.log(jobInfo)
 stuffToDownload.forEach(async (url) => {
     await getAsset(creds, url)
 });
+const downloadLocation = mkDownloadFolder(null, test)
+const filePath = path.join(`${downloadLocation}`, `info_${test}.json`);
+fs.writeFile(filePath, jobInfo, 'utf8', (writeErr) => {
+    if (writeErr) {
+      console.error(`Error writing to the file: ${writeErr}`);
+      return;
+    }
+})
