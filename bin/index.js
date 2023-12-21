@@ -46,10 +46,9 @@ for (const [k,url] of Object.entries(parsedjobInfo.assets)) {
         stuffToDownload.push(url)
     }
 }
-console.log(jobInfo)
 
 stuffToDownload.forEach(async (url) => {
-    await getAsset(creds, url)   
+    await getAsset(creds, url)
 });
 const infoFile = path.join(`${downloadLocation}`, `info_${test}.json`)
 await fs.writeFile(infoFile, jobInfo, 'utf8', (writeErr) => {
