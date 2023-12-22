@@ -37,6 +37,8 @@ switch (args.region) {
         break;
 }
 
+
+// TODO turn this into a "getEverything" func
 const downloadLocation = await mkDownloadFolder(null, test)
 const jobInfo = await getJobDetails(test, region, creds)
 const parsedjobInfo = JSON.parse(jobInfo)
