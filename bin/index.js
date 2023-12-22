@@ -48,7 +48,7 @@ for (const [k,url] of Object.entries(parsedjobInfo.assets)) {
         stuffToDownload.push(url)
     }
 }
-console.log(stuffToDownload)
+console.log("stuffToDownload: ", stuffToDownload)
 stuffToDownload.forEach(async (url) => {
     await getAsset(creds, url)
 });
