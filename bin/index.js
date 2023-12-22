@@ -41,6 +41,7 @@ switch (args.region) {
 // TODO turn this into a "getEverything" func
 const downloadLocation = await mkDownloadFolder(null, test)
 const jobInfo = await getJobDetails(test, region, creds)
+console.log("what we get from getJobDetails:", jobInfo)
 const parsedjobInfo = JSON.parse(jobInfo)
 var stuffToDownload = []
 for (const [k,url] of Object.entries(parsedjobInfo.assets)) {
