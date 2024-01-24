@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
-import routePath from './routes';
+import seleniumRoutePath from './seleniumRoutes';
+import appiumRoutePath from './appiumRoutes';
 import DisplayCode from './components/DisplayCode';
 
 function App() {
@@ -30,13 +31,16 @@ function App() {
   const convertCode = () => {
     if (jsonLog.length) {
       let testCommands = [];
+      console.log(jsonLog)
+      let codeRoute = jsonLog[0].requestBody !== undefined ? appiumRoutePath : seleniumRoutePath;
+      console.log(codeRoute)
+      // console.log(JSON.parse(jsonLog[1].requestBody))
       jsonLog.forEach((command, i) => {
         try {
-          let {path, method, request, result} = command;
-          path = path.includes("session") ? "session" : path //post and delete sessions are assigned here
+          
           testCommands[i] = {
             id: i, 
-            command: routePath(path, method, request, result, testCommands, i)
+            command: codeRoute(command, testCommands, i)
           }
         } catch(e) {
           console.log(command)
