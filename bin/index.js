@@ -48,9 +48,11 @@ for (const [k,url] of Object.entries(parsedjobInfo.assets)) {
         stuffToDownload.push(url)
     }
 }
+// TODO Check if job 30 days old. Don't download anything if so
 stuffToDownload.forEach(async (url) => {
     await getAsset(creds, url)
 });
+
 const infoFile = path.join(`${downloadLocation}`, `info_${test}.json`)
 await fs.writeFile(infoFile, jobInfo, 'utf8', (writeErr) => {
     if (writeErr) {
